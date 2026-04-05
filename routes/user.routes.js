@@ -5,18 +5,18 @@ const {
     createUser,
     updateUser,
     deleteUser
-} = require ('../controllers/user.controller')
+} = require ('../Controllers/user.controller.js')
 
-// obtener todos los usuarios 
-router.get('/', createUser)
+// obtener todos los usuarios
+router.get('/', getUsers)
 
 // Crear un nuevo usuario
 router.post('/', createUser)
 
 //Actualizar un usuario por ID
-router.put('/', updateUser)
+router.put('/:id', updateUser)
 
 // Eliminar un usuario por ID
-router.delete('/', deleteUser)
+router.delete('/:id', deleteUser)
 
 module.exports = router;

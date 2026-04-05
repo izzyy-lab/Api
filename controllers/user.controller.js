@@ -1,9 +1,9 @@
-const user = require('../models/user.model')
+const User = require('../Models/user.model')
 
 // obtener todos los usuarios (Read)
 const getUsers = async (req, res) =>{
     try{
-        const users = await user.find();
+        const users = await User.find();
         res.json(users);
 
     }catch (error){
@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
         const newUser = new User({ name, email})
         await newUser.save()
         res.status(201).json(newUser);
-    } catch (erorr){
+    } catch (error){
         res.status(400).json({message: error.message })
     }
 }
@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
-    
+
 
     try {
         const updatedUser = await User.findByIdAndUpdate(
@@ -37,10 +37,10 @@ const updateUser = async (req, res) => {
             { name, email},
             { new: true }
         )
-        if (!updateUser){
+        if (!updatedUser){
             return res.status(404).json({ message: 'Usuario no encontrado'})
         }
-        res.json(updateUser);
+        res.json(updatedUser);
     } catch (error) {
         res.status(400).json({ message: error.message})
     }
@@ -52,7 +52,7 @@ const deleteUser = async ( req, res) => {
 
     try {
         const deleteUser = await User.findByIdAndDelete(id);
-        
+
         if(!deleteUser){
             return res.status(404).json({ message: 'Usuario no encontrado '})
         }
