@@ -1,3 +1,4 @@
+// Middleware basico para validar un token fijo.
 const authMiddleware =  (req, res, next) => {
     const token = req.headers.authorization;
     if (token !== 'mi_token_secreto'){
